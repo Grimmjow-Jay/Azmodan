@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 public class AzmodanController {
@@ -15,10 +17,12 @@ public class AzmodanController {
     }
 
     @RequestMapping("login")
-    public String login(String userName, HttpServletRequest request) {
+    public Map<String, String> login(String userName, HttpServletRequest request) {
         HttpSession session = request.getSession();
         session.setAttribute("username", userName);
-        return "OK";
+        Map<String, String> result = new HashMap<>();
+        result.put("username", userName);
+        return result;
     }
 
     @RequestMapping("check")

@@ -2,14 +2,21 @@
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns="http://www.springframework.org/schema/beans"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/context
+            https://www.springframework.org/schema/context/spring-context.xsd">
 
     <context:component-scan base-package="com.jay.azmodan"/>
-
-    <bean class="org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration"/>
 
     <bean class="org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory">
         <constructor-arg name="host" value="192.168.154.100"/>
         <constructor-arg name="port" value="6379"/>
     </bean>
+
+    <bean class="org.springframework.session.web.http.DefaultCookieSerializer">
+        <property name="cookiePath" value="/"/>
+        <property name="domainName" value="jay.com"/>
+    </bean>
+
 </beans>
