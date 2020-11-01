@@ -1,5 +1,6 @@
 package com.jay.azmodan.controller;
 
+import com.jay.azmodan.listener.SessionCacheListener;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,6 +21,9 @@ public class AzmodanController {
     public Map<String, String> login(String userName, HttpServletRequest request) {
         HttpSession session = request.getSession();
         session.setAttribute("username", userName);
+
+        SessionCacheListener.save(userName, session);
+
         Map<String, String> result = new HashMap<>();
         result.put("username", userName);
         return result;
@@ -30,7 +34,10 @@ public class AzmodanController {
         HttpSession session = request.getSession();
         Object username = session.getAttribute("username");
         System.out.println(username);
-        return username;
+        Map<String, Object> result = new HashMap<>();
+        result.put("username", username);
+        result.put("sessionId", session.getId());
+        return result;
     }
 
 }

@@ -1,6 +1,6 @@
 console.log("============ ajax ============");
 $.ajax({
-    url: '/login?userName=jay',
+    url: 'login?userName=jay',
     type: 'POST',
     crossDomain: true,
     xhrFields: {
